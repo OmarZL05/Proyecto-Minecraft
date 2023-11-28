@@ -1,1 +1,35 @@
+Se debe encuestar a los jugadores, se pedira: nombre, edad, canal de twitch y youtube(nombre, cantidad de seguidores), hora de inicio del stream(en formato militar 0-2359), duración del stream.
+
+Al iniciar, a cada jugador se le otorgaran 25 unidades de oro, y dependiendo de la cantidad de suscriptores que posea recibira un 5% en oro. el jugador puede elegir con cuantas unidades de hierro iniciar, por 1 de oro, obtendras 10 de hierro, las cantidades solo podran ser adquiridas en multiplicos de 10, y tiene que haber adquirido más de 0(obviamente se debe descontar el precio del hierro en oro). los jugadores pueden elegir 3 diferentes items con los cuales iniciar, así mismo la cantidad de estos items.
+
+El respawn de los jugadores esta basado en la hora de inicio del stream:
+ *   0 -   600 : "Mazmorras de la Torre Oscura"
+ *  601 - 1200 : "Bosque de Valle Alegre"
+ * 1201 - 1800 : "Playa de Cabo Blanco"
+ * 1801 - 2359 : "Poblado de Villa Chica"
+
+Los streamers que esten conectados en estas horas recibiran un premio(sí está conectado entre dos bonos, se recibiran ambos):
+ *    0: 25 Diamantes
+ *  400: 05 Diamantes
+ * 1200: 15 Diamantes
+ * 1600: 20 Diamantes
+
+Al finalizar la entrevista se mostrará en pantalla:
+ * Cantidad de oro que le corresponde al usuario.
+ * Cantidad de hierro.
+ * Hora de inicio - Hora de final.
+ * Ubicación establecida.
+ * Items requeridos.
+ * Cantidad de diamantes a obtener.
+¿Se debe entrevistar a alguién más?
+
+[Salida del Programa]
+  Cantidad de streamers registrados.
+  Nombre del streamer que más diamantes recibió.
+  Total en Oro recibido.
+  Promedio en hierro requerido.
+  Cantidad de jugadores en el valle alegre.
+  Porcentaje de jugadores en las mazmorras de la torre oscura.
+  Diferencia en porcentaje de jugadores en Playa de Cabo Blanco y Poblado de Villa Chica: Deberá ser expresado así "En Playa de Cabo Blanco hay un 25% de jugadores más que en Villa Chica" o "En Playa de Cabo Blanco hay un 25% de jugadores menos que en Villa Chica" según corresponda.
+  Cantidad de jugadores que pidieron "Pico de Diamante"
 
