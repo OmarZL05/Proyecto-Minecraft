@@ -36,11 +36,16 @@ premio(sí está conectado entre dos bonos, se recibiran ambos):
   Cantidad de streamers registrados.
   Nombre del streamer que más diamantes recibió.
   Total en Oro recibido.
-  Promedio en hierro requerido.
+  Promedio en hierro recibido.
   Cantidad de jugadores en el valle alegre.
   Porcentaje de jugadores en las mazmorras de la torre oscura.
   Diferencia en porcentaje de jugadores en Playa de Cabo Blanco y Poblado de Villa Chica: Deberá ser expresado así "En Playa de Cabo Blanco hay un 25% de jugadores más que en Villa Chica" o "En Playa de Cabo Blanco hay un 25% de jugadores menos que en Villa Chica" según corresponda.
   Cantidad de jugadores que pidieron "Pico de Diamante"
 
-   "you@example.com"
-  git config --global user.name "Your Name"
+[Variables]
+  nombre, twich, youtube, lugarRespawn, nombreMayorCantDiamante: Cadena
+  edad, subs, subsTwitch, subsYoutube, horaInicio, horaFinal, horasEnStream: Entero
+  cantOro, cantHierro, cantDiamante, mayorCantDiamante: Entero
+  totalOro, totalHierro
+  contMazmorras, contValle, contCabo, contVilla, cantStreamers
+  seguirEntrevistando: Lógico
