@@ -36,7 +36,7 @@ int main() {
 
         // Sección 2: Asignación de recursos iniciales.
         cantOro = 25+subs*5/100;
-        cout << "Se te han asignado [" << cantOro << "] de oro" << endl;
+        cout << "\nSe te han asignado [" << cantOro << "] de oro" << endl;
 
         do {
             cout << "Cuantas unidades de hierro desea adquirir, son 10 hierro x 1 oro, [solo multiplos de 10]: ";
@@ -51,7 +51,7 @@ int main() {
         for(i = 1; i <= 3; i++) {
             cout << "Indique el item inicial [" << i << "/3]: ";
             cin >> itemInicial;
-            items = items + "; " + itemInicial;
+            items = itemInicial + items + "; ";
             if(itemInicial == "Pico de Diamante") {
                 cantPicosDiamantes = cantPicosDiamantes + 1;
             }
@@ -77,7 +77,7 @@ int main() {
             contVilla = contVilla + 1;
         }
 
-        cout << "Tu zona de respawn es: " << lugarRespawn << endl;
+        cout << "\nTu zona de respawn es: " << lugarRespawn << endl;
 
         // Seccion 4: Asignación de los diamantes.
 
@@ -99,20 +99,11 @@ int main() {
             cantDiamante = cantDiamante + 25;
         }
         
-        cout << "Se te han asignado " << cantDiamante << " Diamantes" << endl;
+        cout << "\nSe te han asignado " << cantDiamante << " Diamantes" << endl;
         
         // Sección 5: Final de entrevista a jugador, mostrar datos en pantalla.
-        /*
-          Al finalizar la entrevista se mostrará en pantalla:
-            * Cantidad de oro que le corresponde al usuario.
-            * Cantidad de hierro.
-            * Hora de inicio - Hora de final.
-            * Ubicación establecida.
-            * Items requeridos.
-            * Cantidad de diamantes a obtener.
-            * ¿Se debe entrevistar a alguién más?
-        */
-        cout << "Gracias por participar " << nombre << ": " << endl;
+
+        cout << "\nGracias por participar " << nombre << ", datos: " << endl;
         cout << "Cantidad de oro: " << cantOro << endl;
         cout << "Cantidad de hierro: " << cantHierro << endl;
         cout << "Cantidad de diamantes: " << cantDiamante << endl;
