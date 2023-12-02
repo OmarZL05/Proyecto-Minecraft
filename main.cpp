@@ -7,7 +7,7 @@ int main() {
     int edad, subs, subsTwitch, subsYoutube, horaInicio, horaFinal, horasEnStream;
     int cantOro, cantHierro, cantDiamante, cantPicosDiamantes, mayorCantDiamante;
     int totalOro, totalHierro, i;
-    float promHierro;
+    float promHierro, porcMazmorras, porcValle, porcCabo, porcVilla, resta_Porc_Cabo_Villa;
     int contMazmorras, contValle, contCabo, contVilla, cantStreamers;
     char seguirEntrevistando;
 
@@ -134,7 +134,11 @@ int main() {
     } while(seguirEntrevistando == 's');
     
     promHierro = totalHierro / cantStreamers;
-
+    porcCabo = contCabo*100/cantStreamers;
+    porcVilla = contVilla*100/cantStreamers;
+    porcMazmorras = contMazmorras*100/cantStreamers;
+    porcValle = contValle*100/cantStreamers;
+    resta_Porc_Cabo_Villa = porcCabo - porcVilla;
     // Sección 6: Final del proyecto, mostrar datos generales en pantalla. 
     /*
     Cantidad de streamers registrados.
@@ -146,13 +150,26 @@ int main() {
     Diferencia en porcentaje de jugadores en Playa de Cabo Blanco y Poblado de Villa Chica: Deberá ser expresado así "En Playa de Cabo Blanco hay un 25% de jugadores más que en Villa Chica" o "En Playa de Cabo Blanco hay un 25% de jugadores menos que en Villa Chica" según corresponda.
     Cantidad de jugadores que pidieron "Pico de Diamante"
     */
+    
+    cout << "Cabo: " << porcCabo << " Mazmorras: " << porcMazmorras << " Villa: " << porcVilla << " Valle: " << porcValle << endl;
 
     cout << "\nCantidad de streamers registrados: " << cantStreamers << endl;
     cout << "Streamer con más diamantes: " << streamerMasDiamantes << endl;
     cout << "Total en oro: " << totalOro << endl;
-    cout << "Promedio de hierro: " << promHierro;
-    cout << "Cantidad de jugadores que elegieron Pico de Diamante, como item inicial: " << cantPicosDiamantes;
+    cout << "Promedio de hierro: " << promHierro << endl;
+    cout << "Cantidad de jugadores que elegieron Pico de Diamante, como item inicial: " << cantPicosDiamantes << endl;
     cout << "Cantidad de jugadores en el Valle Alegre: " << contValle << endl;
+    cout << "Porcentaje de jugadores en Las Mazmorras de la Torre Oscura: " << porcMazmorras << endl;
+    
+    if(porcVilla < porcCabo) {
+        cout << "En Playa de Cabo Blanco hay un "<< resta_Porc_Cabo_Villa <<"\% de jugadores más que en Villa Chica" << endl;
+    } else {
+        if (porcVilla == porcCabo) {
+            cout << "En Playa de Cabo Blanco hay "<<porcVilla<<"\% de jugadores, igual que en Villa Chica" << endl;
+        } else {
+            cout << "En Playa de Cabo Blanco hay un "<< resta_Porc_Cabo_Villa <<"\% de jugadores menos que en Villa Chica" << endl;
+        }
+    }
     
     return 0;
 }
