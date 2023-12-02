@@ -3,7 +3,7 @@ using namespace std;
 
 int main() {
 
-    string nombre, twitch, youtube, lugarRespawn, itemInicial, nombreMayorCantDiamante;
+    string nombre, twitch, youtube, lugarRespawn, itemInicial, items, nombreMayorCantDiamante;
     int edad, subs, subsTwitch, subsYoutube, horaInicio, horaFinal, horasEnStream;
     int cantOro, cantHierro, cantDiamante, cantPicosDiamantes, mayorCantDiamante;
     int totalOro, totalHierro;
@@ -47,9 +47,11 @@ int main() {
 
         cantPicosDiamantes = 0;
 
+        items = "";
         for(i = 1; i <= 3; i++) {
             cout << "Indique el item inicial [" << i << "/3]: ";
             cin >> itemInicial;
+            items = items + "; " + itemInicial;
             if(itemInicial == "Pico de Diamante") {
                 cantPicosDiamantes = cantPicosDiamantes + 1;
             }
@@ -98,11 +100,33 @@ int main() {
         }
         
         cout << "Se te han asignado " << cantDiamante << " Diamantes" << endl;
+        
+        // Sección 5: Final de entrevista a jugador, mostrar datos en pantalla.
+        /*
+          Al finalizar la entrevista se mostrará en pantalla:
+            * Cantidad de oro que le corresponde al usuario.
+            * Cantidad de hierro.
+            * Hora de inicio - Hora de final.
+            * Ubicación establecida.
+            * Items requeridos.
+            * Cantidad de diamantes a obtener.
+            * ¿Se debe entrevistar a alguién más?
+        */
+        cout << "Gracias por participar " << nombre << ": " << endl;
+        cout << "Cantidad de oro: " << cantOro << endl;
+        cout << "Cantidad de hierro: " << cantHierro << endl;
+        cout << "Cantidad de diamantes: " << cantDiamante << endl;
+        cout << "Hora del stream: de " << horaInicio << " a " << horaFinal << endl;
+        cout << "Zona de respawn: " << lugarRespawn << endl;
+        cout << "Items: " << items << endl;
 
         cout << "\nDesea entrevistar a alguien más ? [s/n]: ";
         cin >> seguirEntrevistando;
         cout << " ";
 
     } while(seguirEntrevistando == 's');
+    
+    // Sección 6: Final del proyecto, mostrar datos generales en pantalla. 
+
     return 0;
 }
