@@ -29,6 +29,8 @@ int main() {
         cout << "Cuanto tiempo vas a estar en stream: ";
         cin >> horasEnStream;
 
+        horaFinal = horaInicio + horasEnStream*100;
+        
         subs = subsTwitch+subsYoutube;
 
         cantOro = 25+subs*5/100;
