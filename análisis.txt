@@ -43,9 +43,9 @@ premio(sí está conectado entre dos bonos, se recibiran ambos):
   Cantidad de jugadores que pidieron "Pico de Diamante"
 
 [Variables]
-  nombre, twich, youtube, lugarRespawn, nombreMayorCantDiamante: Cadena
+  nombre, twich, youtube, lugarRespawn, nombreMayorCantDiamante, itemInicial: Cadena
   edad, subs, subsTwitch, subsYoutube, horaInicio, horaFinal, horasEnStream: Entero
-  cantOro, cantHierro, cantDiamante, mayorCantDiamante: Entero
+  cantOro, cantHierro, cantDiamante, cantPicosDiamantes, mayorCantDiamante: Entero
   totalOro, totalHierro
   contMazmorras, contValle, contCabo, contVilla, cantStreamers
   seguirEntrevistando: Lógico
