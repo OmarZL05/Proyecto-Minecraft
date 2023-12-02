@@ -75,17 +75,29 @@ int main() {
             contVilla = contVilla + 1;
         }
 
-        cout << "Tu zona de respawn es: " << lugarRespawn;
+        cout << "Tu zona de respawn es: " << lugarRespawn << endl;
 
         // Seccion 4: Asignación de los diamantes.
-        /*
-        Los streamers que esten conectados en estas horas recibiran un 
-        premio(sí está conectado entre bonos, se recibiran de igual forma):
-          -  400: 05 Diamantes
-          - 1200: 15 Diamantes
-          - 1600: 20 Diamantes
-          -    0: 25 Diamantes
-        */
+
+        cantDiamante = 0;
+
+        if(horaFinal >= 400) {
+            cantDiamante = cantDiamante + 5;
+        }
+
+        if(horaFinal >= 1200) {
+            cantDiamante = cantDiamante + 15;
+        }
+
+        if(horaFinal >= 1600) {
+            cantDiamante = cantDiamante + 20;
+        }
+
+        if(horaFinal > 2359) {
+            cantDiamante = cantDiamante + 25;
+        }
+        
+        cout << "Se te han asignado " << cantDiamante << " Diamantes" << endl;
 
         cout << "\nDesea entrevistar a alguien más ? [s/n]: ";
         cin >> seguirEntrevistando;
