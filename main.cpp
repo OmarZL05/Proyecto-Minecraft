@@ -12,6 +12,7 @@ int main() {
     char seguirEntrevistando;
 
     do{
+        // Sección 1: Encuesta al jugador.
         cout << "Indique su nombre: ";
         cin >> nombre;
         cout << "Indique su edad: ";
@@ -33,6 +34,7 @@ int main() {
         
         subs = subsTwitch+subsYoutube;
 
+        // Sección 2: Asignación de recursos iniciales.
         cantOro = 25+subs*5/100;
         cout << "Se te han asignado [" << cantOro << "] de oro" << endl;
 
@@ -53,6 +55,7 @@ int main() {
             }
         }
 
+        // Sección 3: Asignación de la zona de respawn.
         if(horaInicio <= 600) {
             lugarRespawn = "Mazmorras de la Torre Oscura";
             contMazmorras = contMazmorras + 1;
@@ -74,6 +77,15 @@ int main() {
 
         cout << "Tu zona de respawn es: " << lugarRespawn;
 
+        // Seccion 4: Asignación de los diamantes.
+        /*
+        Los streamers que esten conectados en estas horas recibiran un 
+        premio(sí está conectado entre bonos, se recibiran de igual forma):
+          -  400: 05 Diamantes
+          - 1200: 15 Diamantes
+          - 1600: 20 Diamantes
+          -    0: 25 Diamantes
+        */
 
         cout << "\nDesea entrevistar a alguien más ? [s/n]: ";
         cin >> seguirEntrevistando;

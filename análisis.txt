@@ -17,7 +17,7 @@ así mismo la cantidad de estos items.
  * 1801 - 2359 : "Poblado de Villa Chica"
 
   Los streamers que esten conectados en estas horas recibiran un 
-premio(sí está conectado entre dos bonos, se recibiran ambos):
+premio(sí está conectado entre bonos, se recibiran de igual forma):
   *  400: 05 Diamantes
   * 1200: 15 Diamantes
   * 1600: 20 Diamantes
