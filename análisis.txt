@@ -18,10 +18,10 @@ así mismo la cantidad de estos items.
 
   Los streamers que esten conectados en estas horas recibiran un 
 premio(sí está conectado entre dos bonos, se recibiran ambos):
-  *    0: 25 Diamantes
   *  400: 05 Diamantes
   * 1200: 15 Diamantes
   * 1600: 20 Diamantes
+  *    0: 25 Diamantes
 
   Al finalizar la entrevista se mostrará en pantalla:
   * Cantidad de oro que le corresponde al usuario.

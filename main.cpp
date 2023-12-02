@@ -42,6 +42,7 @@ int main() {
         cantOro = cantOro - cantHierro/10;
 
         cantPicosDiamantes = 0;
+
         for(i = 1; i <= 3; i++) {
             cout << "Indique el item inicial [" << i << "/3]: ";
             cin >> itemInicial;
@@ -50,7 +51,27 @@ int main() {
             }
         }
 
-        cout << "Debug PC:" << cantPicosDiamantes << " Hierro:" << cantHierro << "  Oro: " << cantOro;
+        if(horaInicio <= 600) {
+            lugarRespawn = "Mazmorras de la Torre Oscura";
+            contMazmorras = contMazmorras + 1;
+        }
+        if( horaInicio >= 601 && horaInicio <= 1200) {
+            lugarRespawn = "Bosque de Valle Alegre";
+            contValle = contValle + 1;
+        }
+
+        if( horaInicio >= 1201 && horaInicio <= 1800) {
+            lugarRespawn = "Playa de Cabo Blanco";
+            contCabo = contCabo + 1;
+        }
+
+        if( horaInicio >= 1801 && horaInicio <= 2359) {
+            lugarRespawn = "Poblado de Villa Chica";
+            contVilla = contVilla + 1;
+        }
+
+        cout << "Tu zona de respawn es: " << lugarRespawn;
+
 
         cout << "\nDesea entrevistar a alguien más ? [s/n]: ";
         cin >> seguirEntrevistando;
