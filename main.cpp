@@ -51,7 +51,7 @@ int main() {
         for(i = 1; i <= 3; i++) {
             cout << "Indique el item inicial [" << i << "/3]: ";
             cin >> itemInicial;
-            items = itemInicial + items + "; ";
+            items = items + itemInicial + "; ";
             if(itemInicial == "Pico de Diamante") {
                 cantPicosDiamantes = cantPicosDiamantes + 1;
             }
