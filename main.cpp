@@ -1,15 +1,16 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main() {
 
     string nombre, twitch, youtube, lugarRespawn, itemInicial, items, streamerMasDiamantes;
     int edad, subs, subsTwitch, subsYoutube, horaInicio, horaFinal, horasEnStream;
-    int cantOro, cantHierro, cantDiamante, cantPicosDiamantes, mayorCantDiamante;
+    int cantOro, cantHierro, cantDiamante, cantPicosDiamantes, cantItemInicial, mayorCantDiamante;
     int totalOro, totalHierro, i;
     float promHierro, porcMazmorras, porcValle, porcCabo, porcVilla, resta_Porc_Cabo_Villa;
     int contMazmorras, contValle, contCabo, contVilla, cantStreamers;
-    char seguirEntrevistando;
+    char seguirEntrevistando, noSeRepite;
 
     // Sección de inicializacion de variables.
     cantStreamers = 0;
@@ -25,7 +26,7 @@ int main() {
     do{
         // Sección 1: Encuesta al jugador.
         cout << "Indique su nombre: ";
-        cin >> nombre;
+        getline(cin >> ws, nombre);
         cout << "Indique su edad: ";
         cin >> edad;
         cout << "Indique su canal de twitch: ";
@@ -36,8 +37,11 @@ int main() {
         cin >> youtube;
         cout << "Indique su cantidad de suscriptores en youtube: ";
         cin >> subsYoutube;
-        cout << "A que hora vas a iniciar el stream (use formato militar): ";
-        cin >> horaInicio;
+        do {
+            cout << "A que hora vas a iniciar el stream (use formato militar [0-2359]): ";
+            cin >> horaInicio;
+        } while (horaInicio < 0 || horaInicio > 2359);
+
         cout << "Cuanto tiempo vas a estar en stream: ";
         cin >> horasEnStream;
 
@@ -49,22 +53,38 @@ int main() {
         cantOro = 25+subs*5/100;
         cout << "\nSe te han asignado [" << cantOro << "] de oro" << endl;
 
+        noSeRepite = false;
         do {
             cout << "Cuantas unidades de hierro desea adquirir, son 10 hierro x 1 oro, [solo multiplos de 10]: ";
             cin >> cantHierro;
-        } while ( (cantHierro % 10 != 0) && cantHierro < 10 && cantHierro/10 < cantOro);
+            if(cantHierro % 10 == 0 && cantHierro >= 10 && cantHierro/10 < cantOro) {
+                noSeRepite = true;
+            }
+        } while (noSeRepite == false);
 
         cantOro = cantOro - cantHierro/10;
 
         cantPicosDiamantes = 0;
 
+            
         items = "";
-        for(i = 1; i <= 3; i++) {
+        noSeRepite = false;
+        for(int i = 1; i <= 3; i++) {
             cout << "Indique el item inicial [" << i << "/3]: ";
-            cin >> itemInicial;
-            items = items + itemInicial + "; ";
-            if(itemInicial == "Pico de Diamante") {
+
+            // Cuando escribas el pseudocodigo, solo coloca un "Leer"
+            getline(cin >> ws, itemInicial);
+                
+            do{
+                cout << "Indique la cantidad para " << itemInicial << ": ";
+                cin >> cantItemInicial;
+            } while(cantItemInicial < 1 || cantItemInicial > 64);
+            
+
+            items = items + itemInicial + " x" + to_string(cantItemInicial) + " ; ";
+            if(itemInicial == "pico de diamante") {
                 cantPicosDiamantes = cantPicosDiamantes + 1;
+                noSeRepite = true;
             }
         }
 
@@ -94,19 +114,19 @@ int main() {
 
         cantDiamante = 0;
 
-        if(horaFinal >= 400) {
+        if(horaInicio <= 400 && horaFinal >= 400) {
             cantDiamante = cantDiamante + 5;
         }
 
-        if(horaFinal >= 1200) {
+        if(horaInicio <= 1200 && horaFinal >= 1200) {
             cantDiamante = cantDiamante + 15;
         }
 
-        if(horaFinal >= 1600) {
+        if(horaInicio <= 1600 && horaFinal >= 1600) {
             cantDiamante = cantDiamante + 20;
         }
 
-        if(horaFinal > 2359) {
+        if(horaInicio <= 2359 && horaFinal > 2359) {
             cantDiamante = cantDiamante + 25;
         }
         
@@ -130,6 +150,10 @@ int main() {
         cantStreamers = cantStreamers + 1;
         totalOro = totalOro + cantOro;
         totalHierro = totalHierro + cantHierro;
+        if(mayorCantDiamante < cantDiamante) {
+            mayorCantDiamante = cantDiamante;
+            streamerMasDiamantes = nombre;
+        }
 
     } while(seguirEntrevistando == 's');
     
@@ -139,16 +163,20 @@ int main() {
     porcMazmorras = contMazmorras*100/cantStreamers;
     porcValle = contValle*100/cantStreamers;
     resta_Porc_Cabo_Villa = porcCabo - porcVilla;
+    if(resta_Porc_Cabo_Villa < 0) {
+        resta_Porc_Cabo_Villa = resta_Porc_Cabo_Villa * -1;
+    }
     // Sección 6: Final del proyecto, mostrar datos generales en pantalla. 
     /*
-    Cantidad de streamers registrados.
+    
     Nombre del streamer que más diamantes recibió.
-    Total en Oro recibido.
-    Promedio en hierro recibido.
-    Cantidad de jugadores en el valle alegre.
-    Porcentaje de jugadores en las mazmorras de la torre oscura.
-    Diferencia en porcentaje de jugadores en Playa de Cabo Blanco y Poblado de Villa Chica: Deberá ser expresado así "En Playa de Cabo Blanco hay un 25% de jugadores más que en Villa Chica" o "En Playa de Cabo Blanco hay un 25% de jugadores menos que en Villa Chica" según corresponda.
-    Cantidad de jugadores que pidieron "Pico de Diamante"
+    
+    Diferencia en porcentaje de jugadores en Playa de Cabo Blanco y 
+    Poblado de Villa Chica: Deberá ser expresado así 
+    "En Playa de Cabo Blanco hay un 25% de jugadores más que en Villa Chica" 
+    o 
+    "En Playa de Cabo Blanco hay un 25% de jugadores menos que en Villa Chica" 
+    según corresponda.
     */
     
     cout << "Cabo: " << porcCabo << " Mazmorras: " << porcMazmorras << " Villa: " << porcVilla << " Valle: " << porcValle << endl;
@@ -162,12 +190,12 @@ int main() {
     cout << "Porcentaje de jugadores en Las Mazmorras de la Torre Oscura: " << porcMazmorras << endl;
     
     if(porcVilla < porcCabo) {
-        cout << "En Playa de Cabo Blanco hay un "<< resta_Porc_Cabo_Villa <<"\% de jugadores más que en Villa Chica" << endl;
+        cout << "En Playa de Cabo Blanco hay un "<< resta_Porc_Cabo_Villa <<"% de jugadores más que en Villa Chica" << endl;
     } else {
         if (porcVilla == porcCabo) {
-            cout << "En Playa de Cabo Blanco hay "<<porcVilla<<"\% de jugadores, igual que en Villa Chica" << endl;
+            cout << "En Playa de Cabo Blanco hay "<<porcVilla<<"% de jugadores, igual que en Villa Chica" << endl;
         } else {
-            cout << "En Playa de Cabo Blanco hay un "<< resta_Porc_Cabo_Villa <<"\% de jugadores menos que en Villa Chica" << endl;
+            cout << "En Playa de Cabo Blanco hay un "<< resta_Porc_Cabo_Villa <<"% de jugadores menos que en Villa Chica" << endl;
         }
     }
     
