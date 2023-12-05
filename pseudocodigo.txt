@@ -1,1 +1,197 @@
+Algoritmo de ProyectoMinecraft
+declaracion 
+    variables
+        nombre, twitch, youtube, lugarRespawn, itemInicial, items, streamersMasDiamantes: Cadena
+        edad, subs, subsTwitch, subsYoutube, horaInicio, horaFinal, horasEnEstream: Entero
+        cantOro, cantHierro, cantDiamante, cantPicosDiamantes, cantItemInicial, mayorCantDiamante: Entero
+        totalOro, totalHierro, i: Entero
+        promHierro, porcCaboBlanco, porcVillaChica, porcMazmorras, porcValleAlegre: Real difVilla_Chica_Cabo_Blanco:Real 
+        cantCaboBlanco, cantVillaChica, cantMazmorras, cantValleAlegre, cantStreamers: entero
+        seguirEntrevistando, noSeRepite: Caracter
+Inicio
+    // Inicializacion de variables
+    cantStreamers <- 0
+    cantMazmorras <- 0
+    cantValleAlegre <- 0
+    cantVillaChica <- 0
+    cantCaboBlanco <- 0
+    totalOro <- 0
+    totalHierro <- 0
+    mayorCantDiamante <- 0
+    streamersMasDiamantes <- "Ningun jugador"
 
+    Repetir
+            Escribir "Indique su nombre: "
+            Leer nombre
+            Escribir "Indique su edad: "
+            Leer edad
+            Escribir "Indique su canal de twitch: "
+            Leer twitch
+            Escribir "Indique su cantidad de suscriptores en twitch: "
+            Leer subsTwitch
+            Escribir "Indique su canal de youtube"
+            Leer youtube
+            Escribir "Indique su cantidad de suscriptores en yourube: "
+            Leer subsYoutube
+            Repetir
+                    Escribir "A que hora vas a iniciar el stream (use formato militar [0-2359]): "
+                    Leer horaInicio
+            hasta (horaInicio < 0 y horaInicio > 2359)
+
+            Escribir "Cuanto tiempo vas a estar en stream: "
+            Leer horasEnEstream
+
+            horaFinal <- horaInicio + horasEnEstream
+
+            subs <- subsTwitch + subsYoutube
+
+            // secciÃ³n 2: AsignaciÃ³n de recursos iniciales.
+
+            cantOro <- 25 + subs * 5 / 100
+            Escribir "Se te han asignado [", cantOro, "] de oro"
+
+            noSeRepite <- false
+            Repetir
+                Escribir "Cuantas unidad de hierro desea adquirir, son 10 hierro x 1 oro, [solo multiplos de 10]:"
+                Leer cantHierro
+                Si(cantHierro % 10 = 0 y cantHierro >= 10 y cantHierro/10 < cantOro) Entonces
+                    noSeRepite <- true
+                Fin si
+            Hasta (noSeRepite = false)
+
+            cantOro <- cantOro - cantHierro/100
+
+            cantPicosDiamantes <- 0
+
+            items <- ""
+            noSeRepite <- false
+            Para int i <- 1, i <- 3, i++ Hacer
+                Escribir "Indique el item inicial [", i , "/3]: "
+                Leer itemInicial
+
+                Repetir
+                        Escribir "Indique la cantidad para", itemInicial,": "
+                        Leer cantItemInicial
+                Hasta (cantItemInicial < 1 y cantItemInicial > 64)
+
+                items <- items + itemInicial + " x" + cantItemInicial + ","
+                Si(itemInicial = "Pico diamante") Entonces
+                   cantPicosDiamantes <- cantPicosDiamantes + 1
+                   noSeRepite <- true 
+                fin si
+            Fin para
+
+            // SecciÃ³n 3: AsignaciÃ³n de la zona de respawn.
+
+            si (horaInicio <= 600) entonces
+                lugarRespawn <- "Mazmorras de la torre Oscura"
+                cantMazmorras <- cantMazmorras + 1
+            Fin si
+
+            si( horaInicio >= 601 y horaInicio <= 1200) Entonces
+                lugarRespawn <- "Bosque de valle alegre"
+                cantValleAlegre <- cantValleAlegre + 1
+            Fin si
+
+            si(horaInicio >= 1201 y horaInicio <= 1800) Entonces
+                lugarRespawn <- "Playa de Cabo Blanco"
+                cantCaboBlanco <- cantCaboBlanco + 1
+            Fin si
+
+            si( horaInicio >= 1801 y horaInicio <= 2359) Entonces
+                lugarRespawn <- "Poblado de Villa Chica"
+            Fin si
+
+            Escribir "Tu zona de respawn es: ", lugarRespawn
+
+            // SecciÃ³n 4: AsignaciÃ³n de los diamantes.
+            
+            cantDiamante <- 0
+
+            Si(horaInicio <= 400 y horaFinal >= 400) Entonces
+                cantDiamante <- cantDiamante + 5
+            fin si
+
+            Si( horaInicio <= 1200 y horaFinal >= 1200) Entonces
+                cantDiamante <- cantDiamante + 15
+            Fin si
+
+            Si( horaInicio <= 1600 y horaFinal >= 1200) Entonces
+                cantDiamante <- cantDiamante + 20 
+            Fin si
+
+            Si( horaInicio <= 2359 y horaFinal >= 2359) Entonces
+                cantDiamante <- cantDiamante + 25
+            Fin si
+
+            Escribir "Se te ha asignado", cantDiamante, " Diamantes"
+
+            // SecciÃ³n 5: Final de netrevista al jugador, mostrar datos en pantalla.
+
+            Escribir "Gracias por participar", nombre, "datos: "
+            Escribir "Cantidad de oro: ", cantOro
+            Escribir "Cantidad de hierro: ", cantHierro
+            Escribir "Cantidad de diamantes: ", cantDiamante
+            Escribir "Hora del stream, de: ", horaInicio, " a ", horaFinal
+            Escribir "Zona de respawn: ", lugarRespawn
+            Escribir "Items: ", items
+
+            Escribir "Desea entrevistar alguien mÃ¡s ? [s/n]: "
+            Leer seguirEntrevistando
+            Escribir ""
+
+            // Sin secciÃ³n.
+            cantStreamers <- cantStreamers + 1
+            totalOro <- totalOro + cantOro
+            totalHierro <- totalHierro + cantHierro
+            Si(mayorCantDiamante < cantDiamante) entonces
+                mayorCantDiamante <- cantDiamante
+                streamersMasDiamantes <- nombre
+            Fin si
+    Hasta(seguirEntrevistando = 's')
+
+    promHierro <- totalHierro / cantStreamers
+    porcMazmorras <- cantMazmorras * 100 / cantStreamers
+    porcValleAlegre <- cantValleAlegre * 100 / cantStreamers
+    porcVillaChica <- cantVillaChica * 100 / cantStreamers
+    porcCaboBlanco <- cantCaboBlanco * 100 /  cantStreamers
+    
+    difVilla_Chica_Cabo_Blanco <- porcCaboBlanco - porcVillaChica
+
+    Si(difVilla_Chica_Cabo_Blanco < 0) entonces
+        difVilla_Chica_Cabo_Blanco <- difVilla_Chica_Cabo_Blanco * -1
+    Fin si
+
+    // SecciÃ³n 6: Final del proyecto, mostrar datos generales en pantalla.
+    /*
+
+    Nombre del streamer que mÃ¡s diamantes recibiÃ³.
+    
+    Diferencia en porcentaje de jugadores en Playa de Cabo Blanco y 
+    Poblado de Villa Chica: DeberÃ¡ ser expresado asÃ­ 
+    "En Playa de Cabo Blanco hay un 25% de jugadores mÃ¡s que en Villa Chica" 
+    o 
+    "En Playa de Cabo Blanco hay un 25% de jugadores menos que en Villa Chica" 
+    segÃºn corresponda.
+    */
+
+    Escribir "Cantidad de streamers registrados: ", cantStreamers
+    Escribir "streamers con mÃ¡s diamantes: ", streamersMasDiamantes
+    Escribir "Total en oro: ", totalOro
+    Escribir "Promedio de hierro: ", promHierro
+    Escribir "Cantidad de jugadores que eligieron el Pico de Diamantes, como item inicial: ", cantPicosDiamantes  
+    Escribir "Cantidad de jugadores en Valle Alegre: ", cantValleAlegre
+    Escribir "Porcentaje de jugadores en Las Mazmorras de la torre oscura: ", porcMazmorras
+
+    Si(porcCaboBlanco > porcVillaChica) Entonces
+        Escribir "En playa de Cabo Blanco hay un ",difVilla_Chica_Cabo_Blanco, "% de jugadores mas que en Villa Chica"
+    Fin si
+
+    Si(porcCaboBlanco = porcVillaChica) Entonces
+        Escribir "En Playa de Cboa Blanco hay ", porcVillaChica, "% de jugadores igual que en Villa Chica"
+    fin si
+
+    Si(porcCaboBlanco < porcVillaChica) Entonces
+        Escribir "En Playa de Cabo Blanco hay ", difVilla_Chica_Cabo_Blanco, "menos que en Villa Chica"
+    Fin si    
+Fin
