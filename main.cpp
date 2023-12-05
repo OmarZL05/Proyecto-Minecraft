@@ -42,10 +42,10 @@ int main() {
             cin >> horaInicio;
         } while (horaInicio < 0 || horaInicio > 2359);
 
-        cout << "Cuanto tiempo vas a estar en stream: ";
+        cout << "Cuanto tiempo vas a estar en stream (use formato militar [0-2359]): ";
         cin >> horasEnStream;
 
-        horaFinal = horaInicio + horasEnStream*100;
+        horaFinal = horaInicio + horasEnStream;
         
         subs = subsTwitch+subsYoutube;
 
@@ -169,17 +169,6 @@ int main() {
         difVilla_ChicaCabo_Blanco = difVilla_ChicaCabo_Blanco * -1;
     }
     // Sección 6: Final del proyecto, mostrar datos generales en pantalla. 
-    /*
-    
-    Nombre del streamer que más diamantes recibió.
-    
-    Diferencia en porcentaje de jugadores en Playa de Cabo Blanco y 
-    Poblado de Villa Chica: Deberá ser expresado así 
-    "En Playa de Cabo Blanco hay un 25% de jugadores más que en Villa Chica" 
-    o 
-    "En Playa de Cabo Blanco hay un 25% de jugadores menos que en Villa Chica" 
-    según corresponda.
-    */
     
     cout << "\nCantidad de streamers registrados: " << cantStreamers << endl;
     cout << "Streamer con más diamantes: " << streamerMasDiamantes << endl;
