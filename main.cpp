@@ -8,16 +8,16 @@ int main() {
     int edad, subs, subsTwitch, subsYoutube, horaInicio, horaFinal, horasEnStream;
     int cantOro, cantHierro, cantDiamante, cantPicosDiamantes, cantItemInicial, mayorCantDiamante;
     int totalOro, totalHierro, i;
-    float promHierro, porcMazmorras, porcValle, porcCabo, porcVilla, resta_Porc_Cabo_Villa;
-    int contMazmorras, contValle, contCabo, contVilla, cantStreamers;
+    float promHierro, porcCaboBlanco, porcVillaChica, porcMazmorras, porcValleAlegre, difVilla_ChicaCabo_Blanco;
+    int cantCaboBlanco, cantVillaChica, cantMazmorras, cantValleAlegre, cantStreamers;
     char seguirEntrevistando, noSeRepite;
 
     // Sección de inicializacion de variables.
     cantStreamers = 0;
-    contMazmorras = 0;
-    contValle = 0;
-    contVilla = 0;
-    contCabo = 0;
+    cantMazmorras = 0;
+    cantValleAlegre = 0;
+    cantVillaChica = 0;
+    cantCaboBlanco = 0;
     totalOro = 0;
     totalHierro = 0;
     mayorCantDiamante = 0;
@@ -91,21 +91,21 @@ int main() {
         // Sección 3: Asignación de la zona de respawn.
         if(horaInicio <= 600) {
             lugarRespawn = "Mazmorras de la Torre Oscura";
-            contMazmorras = contMazmorras + 1;
+            cantMazmorras = cantMazmorras + 1;
         }
         if( horaInicio >= 601 && horaInicio <= 1200) {
             lugarRespawn = "Bosque de Valle Alegre";
-            contValle = contValle + 1;
+            cantValleAlegre = cantValleAlegre + 1;
         }
 
         if( horaInicio >= 1201 && horaInicio <= 1800) {
             lugarRespawn = "Playa de Cabo Blanco";
-            contCabo = contCabo + 1;
+            cantCaboBlanco = cantCaboBlanco + 1;
         }
 
         if( horaInicio >= 1801 && horaInicio <= 2359) {
             lugarRespawn = "Poblado de Villa Chica";
-            contVilla = contVilla + 1;
+            cantVillaChica = cantVillaChica + 1;
         }
 
         cout << "\nTu zona de respawn es: " << lugarRespawn << endl;
@@ -158,13 +158,15 @@ int main() {
     } while(seguirEntrevistando == 's');
     
     promHierro = totalHierro / cantStreamers;
-    porcCabo = contCabo*100/cantStreamers;
-    porcVilla = contVilla*100/cantStreamers;
-    porcMazmorras = contMazmorras*100/cantStreamers;
-    porcValle = contValle*100/cantStreamers;
-    resta_Porc_Cabo_Villa = porcCabo - porcVilla;
-    if(resta_Porc_Cabo_Villa < 0) {
-        resta_Porc_Cabo_Villa = resta_Porc_Cabo_Villa * -1;
+    porcMazmorras = cantMazmorras*100/cantStreamers;
+    porcValleAlegre = cantValleAlegre*100/cantStreamers;
+    porcVillaChica = cantVillaChica*100/cantStreamers;
+    porcCaboBlanco = cantCaboBlanco*100/cantStreamers;
+
+    difVilla_ChicaCabo_Blanco = porcCaboBlanco - porcVillaChica;
+    
+    if(difVilla_ChicaCabo_Blanco < 0) {
+        difVilla_ChicaCabo_Blanco = difVilla_ChicaCabo_Blanco * -1;
     }
     // Sección 6: Final del proyecto, mostrar datos generales en pantalla. 
     /*
@@ -179,25 +181,25 @@ int main() {
     según corresponda.
     */
     
-    cout << "Cabo: " << porcCabo << " Mazmorras: " << porcMazmorras << " Villa: " << porcVilla << " Valle: " << porcValle << endl;
-
     cout << "\nCantidad de streamers registrados: " << cantStreamers << endl;
     cout << "Streamer con más diamantes: " << streamerMasDiamantes << endl;
     cout << "Total en oro: " << totalOro << endl;
     cout << "Promedio de hierro: " << promHierro << endl;
     cout << "Cantidad de jugadores que elegieron Pico de Diamante, como item inicial: " << cantPicosDiamantes << endl;
-    cout << "Cantidad de jugadores en el Valle Alegre: " << contValle << endl;
+    cout << "Cantidad de jugadores en el Valle Alegre: " << cantValleAlegre << endl;
     cout << "Porcentaje de jugadores en Las Mazmorras de la Torre Oscura: " << porcMazmorras << endl;
     
-    if(porcVilla < porcCabo) {
-        cout << "En Playa de Cabo Blanco hay un "<< resta_Porc_Cabo_Villa <<"% de jugadores más que en Villa Chica" << endl;
-    } else {
-        if (porcVilla == porcCabo) {
-            cout << "En Playa de Cabo Blanco hay "<<porcVilla<<"% de jugadores, igual que en Villa Chica" << endl;
-        } else {
-            cout << "En Playa de Cabo Blanco hay un "<< resta_Porc_Cabo_Villa <<"% de jugadores menos que en Villa Chica" << endl;
-        }
+    if(porcCaboBlanco > porcVillaChica) {
+        cout << "En Playa de Cabo Blanco hay un "<< difVilla_ChicaCabo_Blanco <<"% de jugadores, más que en Villa Chica" << endl;
     }
-    
+
+    if (porcCaboBlanco == porcVillaChica) {
+        cout << "En Playa de Cabo Blanco hay "<<porcVillaChica<<"% de jugadores, igual que en Villa Chica" << endl;
+    } 
+
+    if(porcCaboBlanco < porcVillaChica) {
+        cout << "En Playa de Cabo Blanco hay un "<< difVilla_ChicaCabo_Blanco <<"% de jugadores, menos que en Villa Chica" << endl;
+    }
+
     return 0;
 }
