@@ -10,7 +10,8 @@ int main() {
     int totalOro, totalHierro, i;
     float promHierro, porcCaboBlanco, porcVillaChica, porcMazmorras, porcValleAlegre, difVilla_ChicaCabo_Blanco;
     int cantCaboBlanco, cantVillaChica, cantMazmorras, cantValleAlegre, cantStreamers;
-    char seguirEntrevistando, noSeRepite;
+    char seguirEntrevistando;
+    bool noSeRepite;
 
     // Sección de inicializacion de variables.
     cantStreamers = 0;
@@ -20,7 +21,7 @@ int main() {
     cantCaboBlanco = 0;
     totalOro = 0;
     totalHierro = 0;
-    mayorCantDiamante = 0;
+    mayorCantDiamante = 1;
     streamerMasDiamantes = "Ningun jugador";
 
     do{
@@ -69,7 +70,7 @@ int main() {
             
         items = "";
         noSeRepite = false;
-        for(int i = 1; i <= 3; i++) {
+        for(i = 1; i <= 3; i++) {
             cout << "Indique el item inicial [" << i << "/3]: ";
 
             // Cuando escribas el pseudocodigo, solo coloca un "Leer"
@@ -82,7 +83,7 @@ int main() {
             
 
             items = items + itemInicial + " x" + to_string(cantItemInicial) + " ; ";
-            if(itemInicial == "pico de diamante") {
+            if(itemInicial == "pico de diamante" && noSeRepite == false) {
                 cantPicosDiamantes = cantPicosDiamantes + 1;
                 noSeRepite = true;
             }
@@ -134,7 +135,7 @@ int main() {
         
         // Sección 5: Final de entrevista a jugador, mostrar datos en pantalla.
 
-        cout << "\nGracias por participar " << nombre << ", datos: " << endl;
+        cout << "\nEstos son tus datos " << nombre << ": " << endl;
         cout << "Cantidad de oro: " << cantOro << endl;
         cout << "Cantidad de hierro: " << cantHierro << endl;
         cout << "Cantidad de diamantes: " << cantDiamante << endl;
@@ -155,7 +156,7 @@ int main() {
             streamerMasDiamantes = nombre;
         }
 
-    } while(seguirEntrevistando == 's');
+    } while(seguirEntrevistando == 's' | seguirEntrevistando == 'S');
     
     promHierro = totalHierro / cantStreamers;
     porcMazmorras = cantMazmorras*100/cantStreamers;
@@ -173,10 +174,10 @@ int main() {
     cout << "\nCantidad de streamers registrados: " << cantStreamers << endl;
     cout << "Streamer con más diamantes: " << streamerMasDiamantes << endl;
     cout << "Total en oro: " << totalOro << endl;
-    cout << "Promedio de hierro: " << promHierro << endl;
-    cout << "Cantidad de jugadores que elegieron Pico de Diamante, como item inicial: " << cantPicosDiamantes << endl;
+    cout << "Promedio de hierro total: " << promHierro << endl;
+    cout << "Cantidad de jugadores que elegieron [pico de diamante] como item inicial: " << cantPicosDiamantes << endl;
     cout << "Cantidad de jugadores en el Valle Alegre: " << cantValleAlegre << endl;
-    cout << "Porcentaje de jugadores en Las Mazmorras de la Torre Oscura: " << porcMazmorras << endl;
+    cout << "Porcentaje de jugadores en las Mazmorras de la Torre Oscura: " << porcMazmorras << endl;
     
     if(porcCaboBlanco > porcVillaChica) {
         cout << "En Playa de Cabo Blanco hay un "<< difVilla_ChicaCabo_Blanco <<"% de jugadores, más que en Villa Chica" << endl;
