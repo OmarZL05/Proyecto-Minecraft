@@ -152,7 +152,6 @@ int main() {
         cout << "\nEstos son tus datos " << nombre << ": " << endl;
         cout << "Cantidad de oro: " << cantOro << endl;
         cout << "Cantidad de hierro: " << cantHierro << endl;
-        cout << "Cantidad de diamantes: " << cantDiamante << endl;
         if(horaFinal > 2359) {
             cout << "Hora del stream: de " << horaInicio << " a " << (horaFinal-2359) << " (del día siguiente)" << endl;
         } else {
@@ -160,6 +159,7 @@ int main() {
         }
         cout << "Zona de respawn: " << lugarRespawn << endl;
         cout << "Items: " << items << endl;
+        cout << "Cantidad de diamantes: " << cantDiamante << endl;
 
         cout << "\nDesea entrevistar a alguien más ? [s/n]: ";
         cin >> seguirEntrevistando;
