@@ -26,7 +26,7 @@ int main() {
 
     do{
         // Sección 1: Encuesta al jugador.
-        cout << "Bienvenido, eres el streamer N" << (cantStreamers+1);
+        cout << "Bienvenido, eres el streamer N" << (cantStreamers+1) << endl;
         cout << "Indique su nombre: ";
         getline(cin >> ws, nombre);
         cout << "Indique su edad: ";
