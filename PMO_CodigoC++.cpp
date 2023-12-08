@@ -26,6 +26,7 @@ int main() {
 
     do{
         // Sección 1: Encuesta al jugador.
+        cout << "Bienvenido, eres el streamer N" << (cantStreamers+1);
         cout << "Indique su nombre: ";
         getline(cin >> ws, nombre);
         cout << "Indique su edad: ";
@@ -54,13 +55,28 @@ int main() {
         cantOro = 25+subs*5/100;
         cout << "\nSe te han asignado [" << cantOro << "] de oro" << endl;
 
-        noSeRepite = false;
         do {
-            cout << "Cuantas unidades de hierro desea adquirir, son 10 hierro x 1 oro, [solo multiplos de 10]: ";
+            noSeRepite = true;
+            cout << "Cuantas unidades de hierro desea adquirir [10 de Hierro por 1 de Oro] [solo multiplos de 10]: ";
             cin >> cantHierro;
-            if(cantHierro % 10 == 0 && cantHierro >= 10 && cantHierro/10 < cantOro) {
-                noSeRepite = true;
+
+            if(cantHierro > 0) {
+                if(cantHierro % 10 != 0) {
+                    noSeRepite = false;
+                    cout << "La cantidad debe ser multiplo de 10" << endl;
+                }
+
+                if(cantHierro/10 > cantOro) {
+                    noSeRepite = false;
+                    cout << "No puedes adquirir más de " << (cantOro*10) << " de hierro;" << endl;
+                }
+            } 
+            else {
+                noSeRepite = false;
+                cout << "La cantidad debe ser mayor de 0 y multiplo de 10;" << endl;
             }
+            cout << endl;
+
         } while (noSeRepite == false);
 
         cantOro = cantOro - cantHierro/10;
@@ -75,12 +91,10 @@ int main() {
 
             // Cuando escribas el pseudocodigo, solo coloca un "Leer"
             getline(cin >> ws, itemInicial);
-                
-            do{
-                cout << "Indique la cantidad para " << itemInicial << ": ";
-                cin >> cantItemInicial;
-            } while(cantItemInicial < 1 || cantItemInicial > 64);
             
+            cout << "Indique la cantidad para " << itemInicial << ": ";
+            cin >> cantItemInicial;
+        
 
             items = items + itemInicial + " x" + to_string(cantItemInicial) + " ; ";
             if(itemInicial == "pico de diamante" && noSeRepite == false) {
@@ -139,13 +153,18 @@ int main() {
         cout << "Cantidad de oro: " << cantOro << endl;
         cout << "Cantidad de hierro: " << cantHierro << endl;
         cout << "Cantidad de diamantes: " << cantDiamante << endl;
-        cout << "Hora del stream: de " << horaInicio << " a " << horaFinal << endl;
+        if(horaFinal > 2359) {
+            horaFinal = horaFinal - horaInicio;
+            cout << "Hora del stream: de " << horaInicio << " a " << horaFinal << " (del día siguiente)" << endl;
+        } else {
+            cout << "Hora del stream: de " << horaInicio << " a " << horaFinal << endl;
+        }
         cout << "Zona de respawn: " << lugarRespawn << endl;
         cout << "Items: " << items << endl;
 
         cout << "\nDesea entrevistar a alguien más ? [s/n]: ";
         cin >> seguirEntrevistando;
-        cout << " " << endl;
+        cout << endl;
 
         // Sin sección
         cantStreamers = cantStreamers + 1;
@@ -175,7 +194,6 @@ int main() {
     cout << "Streamer con más diamantes: " << streamerMasDiamantes << endl;
     cout << "Total en oro: " << totalOro << endl;
     cout << "Promedio de hierro total: " << promHierro << endl;
-    cout << "Cantidad de jugadores que elegieron [pico de diamante] como item inicial: " << cantPicosDiamantes << endl;
     cout << "Cantidad de jugadores en el Valle Alegre: " << cantValleAlegre << endl;
     cout << "Porcentaje de jugadores en las Mazmorras de la Torre Oscura: " << porcMazmorras << endl;
     
@@ -190,6 +208,6 @@ int main() {
     if(porcCaboBlanco < porcVillaChica) {
         cout << "En Playa de Cabo Blanco hay un "<< difVilla_ChicaCabo_Blanco <<"% de jugadores, menos que en Villa Chica" << endl;
     }
-
+    cout << "Cantidad de jugadores que elegieron [pico de diamante] como item inicial: " << cantPicosDiamantes << endl;
     return 0;
 }

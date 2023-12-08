@@ -21,6 +21,7 @@ Inicio
     streamersMasDiamantes <-- "Ningun jugador"
 
     Repetir
+        Escribir "Bienvenido, eres el streamer N", (cantStreamers+1)
         Escribir "Indique su nombre"
         Leer nombre
         Escribir "Indique su edad"
@@ -46,93 +47,112 @@ Inicio
         subs <-- subsTwitch + subsYoutube
 
         cantOro <-- 25 + subs * 5 / 100
-        Escribir "Se te han asignado [", cantOro, "] de oro"
+        Escribir "\nSe te han asignado [", cantOro, "] de oro"
 
-        noSeRepite <- false
         Repetir
-            Escribir "Cuantas unidad de hierro desea adquirir, son 10 hierro x 1 oro, [solo multiplos de 10]"
+            noSeRepite <-- Verdadero
+            Escribir "Cuantas unidades de hierro desea adquirir [10 de Hierro por 1 de Oro] [solo multiplos de 10]"
             Leer cantHierro
-            Si(cantHierro % 10 = 0 y cantHierro >= 10 y cantHierro/10 < cantOro) Entonces
-                noSeRepite <-- true
-            Fin si
-        Hasta (noSeRepite == false)
+
+            Si (cantHierro > 0) Entonces
+                Si (cantHierro % 10 != 0) Entonces
+                    noSeRepite <-- Falso
+                    Escribir "La cantidad debe ser multiplo de 10"
+                Fin Si
+
+                Si (cantHierro/10 > cantOro) Entonces
+                    noSeRepite = Falso
+                    Escribir "No puedes adquirir más de ", (cantOro*10), " de hierro;"
+                Fin Si
+            Sino
+                noSeRepite <-- Falso
+                Escribir "La cantidad debe ser mayor de 0 y multiplo de 10;"
+            Fin Si
+            Escribir "\n"
+
+        Hasta ( noSeRepite = Verdadero )
 
         cantOro <-- cantOro - cantHierro/10
 
         cantPicosDiamantes <-- 0
 
         items <-- ""
-        noSeRepite <-- false
-        Para i <-- 1 hasta 3
+        noSeRepite <-- Falso
+        Para i <-- 1 Hasta 3 Hacer
             Escribir "Indique el item inicial [", i , "/3]"
             Leer itemInicial
 
-            Repetir
-                Escribir "Indique la cantidad para ", itemInicial
-                Leer cantItemInicial
-            Hasta (cantItemInicial >= 1 y cantItemInicial <= 64)
-
-            items <-- items, itemInicial, " x", cantItemInicial, ";"
-            Si(itemInicial == "pico de diamante" y noSeRepite == Falso) Entonces
-                cantPicosDiamantes <- cantPicosDiamantes + 1
+            Escribir "Indique la cantidad para ", itemInicial
+            Leer cantItemInicial
+            
+            items <-- items, itemInicial, " x", cantItemInicial, "; "
+            Si (itemInicial = "pico de diamante" y noSeRepite = Falso) Entonces
+                cantPicosDiamantes <-- cantPicosDiamantes + 1
                 noSeRepite <-- Verdadero 
-            Fin si
-        Fin para
+            Fin Si
+        Fin Para
 
         Si (horaInicio <= 600) Entonces
             lugarRespawn <-- "Mazmorras de la torre Oscura"
             cantMazmorras <-- cantMazmorras + 1
-        Fin si
+        Fin Si
 
         Si (horaInicio >= 601 y horaInicio <= 1200) Entonces
             lugarRespawn <-- "Bosque de valle alegre"
             cantValleAlegre <-- cantValleAlegre + 1
-        Fin si
+        Fin Si
 
         Si (horaInicio >= 1201 y horaInicio <= 1800) Entonces
             lugarRespawn <-- "Playa de Cabo Blanco"
             cantCaboBlanco <-- cantCaboBlanco + 1
-        Fin si
+        Fin Si
 
         Si (horaInicio >= 1801 y horaInicio <= 2359) Entonces
             lugarRespawn <-- "Poblado de Villa Chica"
             cantVillaChica <-- cantVillaChica + 1
-        Fin si
+        Fin Si
 
-        Escribir "Tu zona de respawn es: ", lugarRespawn
+        Escribir "\nTu zona de respawn es: ", lugarRespawn
 
-        cantDiamante <- 0
-
+        cantDiamante <-- 0
         Si (horaInicio <= 400 y horaFinal >= 400) Entonces
             cantDiamante <-- cantDiamante + 5
-        fin si
+        fin Si
 
         Si (horaInicio <= 1200 y horaFinal >= 1200) Entonces
             cantDiamante <-- cantDiamante + 15
-        Fin si
+        Fin Si
 
         Si (horaInicio <= 1600 y horaFinal >= 1200) Entonces
             cantDiamante <-- cantDiamante + 20 
-        Fin si
+        Fin Si
 
         Si (horaInicio <= 2359 y horaFinal >= 2359) Entonces
             cantDiamante <- cantDiamante + 25
-        Fin si
+        Fin Si
 
-        Escribir "Se te ha asignado", cantDiamante, " Diamantes"
+        Escribir "Se te han asignado", cantDiamante, " Diamantes"
 
-        Escribir " "
-        Escribir "Estos son tus datos", nombre, ": "
+        Si (horaFinal > 2359) Entonces
+            horaFinal = horaFinal - horaInicio
+
+        Escribir "\nEstos son tus datos", nombre, ": "
         Escribir "Cantidad de oro: ", cantOro
         Escribir "Cantidad de hierro: ", cantHierro
         Escribir "Cantidad de diamantes: ", cantDiamante
-        Escribir "Hora del stream, de: ", horaInicio, " a ", horaFinal
+        Si (horaFinal > 2359) Entonces
+            horaFinal = horaFinal - horaInicio
+            Escribir "Hora del stream, de: ", horaInicio, " a ", horaFinal, " (del día siguiente)"
+        Sino 
+            Escribir "Hora del stream, de: ", horaInicio, " a ", horaFinal
+        Fin Si
+
         Escribir "Zona de respawn: ", lugarRespawn
         Escribir "Items: ", items
 
-        Escribir "Desea entrevistar alguien más ? [s/n]: "
+        Escribir "\nDesea entrevistar alguien más ? [s/n]: "
         Leer seguirEntrevistando
-        Escribir " "
+        Escribir "\n"
 
         cantStreamers <-- cantStreamers + 1
         totalOro <-- totalOro + cantOro
@@ -140,8 +160,8 @@ Inicio
         Si(mayorCantDiamante < cantDiamante) Entonces
             mayorCantDiamante <-- cantDiamante
             streamersMasDiamantes <-- nombre
-        Fin si
-    Hasta(seguirEntrevistando == 's' o seguirEntrevistando == 'S')
+        Fin Si
+    Hasta(seguirEntrevistando = 's' o seguirEntrevistando = 'S')
 
     promHierro <-- totalHierro / cantStreamers
     porcMazmorras <-- cantMazmorras * 100 / cantStreamers
@@ -152,22 +172,22 @@ Inicio
     difVilla_Chica_Cabo_Blanco <-- porcCaboBlanco - porcVillaChica
     
     Escribir "Cantidad de streamers registrados: ", cantStreamers
-    Escribir "streamers con más diamantes: ", streamersMasDiamantes
+    Escribir "Streamer con más diamantes: ", streamersMasDiamantes
     Escribir "Total en oro: ", totalOro
     Escribir "Promedio de hierro total: ", promHierro
-    Escribir "Cantidad de jugadores que eligieron [pico de diamante] como item inicial: ", cantPicosDiamantes  
     Escribir "Cantidad de jugadores en el Valle Alegre: ", cantValleAlegre
     Escribir "Porcentaje de jugadores en las Mazmorras de la torre oscura: ", porcMazmorras
-
+    
     Si (porcCaboBlanco > porcVillaChica) Entonces
         Escribir "En playa de Cabo Blanco hay un ", difVilla_Chica_Cabo_Blanco, "% de jugadores mas que en Villa Chica"
-    Fin si
+    Fin Si
 
     Si(porcCaboBlanco = porcVillaChica) Entonces
         Escribir "En Playa de Cabo Blanco hay un ", porcVillaChica, "% de jugadores, igual que en Villa Chica"
-    Fin si
+    Fin Si
 
     Si(porcCaboBlanco < porcVillaChica) Entonces
         Escribir "En Playa de Cabo Blanco hay un ", difVilla_Chica_Cabo_Blanco, "% de jugadores menos que en Villa Chica"
-    Fin si    
+    Fin Si    
+    Escribir "Cantidad de jugadores que eligieron [pico de diamante] como item inicial: ", cantPicosDiamantes  
 Fin
