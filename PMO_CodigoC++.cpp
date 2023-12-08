@@ -154,8 +154,7 @@ int main() {
         cout << "Cantidad de hierro: " << cantHierro << endl;
         cout << "Cantidad de diamantes: " << cantDiamante << endl;
         if(horaFinal > 2359) {
-            horaFinal = horaFinal - horaInicio;
-            cout << "Hora del stream: de " << horaInicio << " a " << horaFinal << " (del día siguiente)" << endl;
+            cout << "Hora del stream: de " << horaInicio << " a " << (horaFinal-2359) << " (del día siguiente)" << endl;
         } else {
             cout << "Hora del stream: de " << horaInicio << " a " << horaFinal << endl;
         }
